@@ -1,0 +1,37 @@
+{
+  "name": "security-fns",
+  "version": "0.0.1",
+  "description": "A collection of security and privacy functions for JavaScript Developers",
+  "keywords": ["security", "functions", "javascript"],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "author": "Beto Muniz <contato@betomuniz.com>",
+  "license": "MIT",
+  "type": "module",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "types": "dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/obetomuniz/security-fns.git"
+  },
+  "bugs": {
+    "url": "https://github.com/obetomuniz/security-fns/issues",
+    "email": "contato@betomuniz.com"
+  },
+  "scripts": {
+    "pkg": "rm -rf ./dist/ && rollup -c",
+    "prepublishOnly": "npm run pkg",
+    "release": "release-it"
+  }
+}

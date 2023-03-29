@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "rootDir": "lib",
+    "noImplicitAny": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "lib": ["esnext", "dom"],
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "types"
+  },
+  "outDir": "out-tsc",
+  "include": ["lib/**/*.ts"],
+  "exclude": ["node_modules"]
+}

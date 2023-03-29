@@ -1,0 +1,12 @@
+.gitignore
+.prettierrc
+.prettierignore
+.npmignore
+.prettierrc
+package-lock.json
+rollup.config.js
+tsconfig.json
+lib/
+docs/
+node_modules/
+coverage/
