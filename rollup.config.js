@@ -29,7 +29,6 @@ const config = [
       }),
       filesize(),
     ],
-    external: ["axios", "jsdom", "xpath-ts", "puppeteer", "lodash.get"],
   },
   {
     input: "dist/esm/types/index.d.ts",
