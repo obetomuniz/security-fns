@@ -1,63 +1,37 @@
-export interface CSPDirective {
-  [directive: string]: DirectiveValue | DirectiveFunction
-  nonce?: string
-}
-
-export interface CSPConfig {
-  directives: CSPDirective
-  reportUri?: string
-  nonce?: string
-}
-
-type DirectiveValue = string | string[] | (() => string | string[])
-
-type DirectiveFunction = () => DirectiveValue
-
-export function createNonce() {
-  const array = new Uint8Array(16)
-  crypto.getRandomValues(array)
-  return btoa(String.fromCharCode(...array))
-}
+import { CSPConfig, DirectiveFunction, DirectiveValue } from "./types"
 
 function serializeDirectiveValue(
   value: DirectiveValue,
   nonce?: string
 ): string {
-  if (typeof value === "string") {
-    if (nonce && value === "'self'") {
-      return `'nonce-${nonce}'`
-    }
-    return value
-  }
-
   if (Array.isArray(value)) {
-    if (nonce) {
-      value = [...value, `'nonce-${nonce}'`]
-    }
     return value.join(" ")
   }
 
-  return value()
+  if (nonce) {
+    return `${value} nonce-${nonce}`
+  }
+
+  return value
+}
+
+function serializeDirective(
+  directive: string,
+  value: DirectiveValue | DirectiveFunction,
+  nonce?: string
+): string {
+  const serializedValue =
+    typeof value === "function"
+      ? serializeDirectiveValue(value(), nonce)
+      : serializeDirectiveValue(value, nonce)
+  return `${directive} ${serializedValue}`
 }
 
 export function generateCSP(cspConfig: CSPConfig): string {
   const { directives, reportUri, nonce } = cspConfig
-  const serializedDirectives = []
-
-  for (const [directive, value] of Object.entries(directives)) {
-    let serializedValue = serializeDirectiveValue(value)
-
-    if (directives[directive].nonce) {
-      serializedValue = serializeDirectiveValue(
-        value,
-        directives[directive].nonce
-      )
-    } else if (nonce) {
-      serializedValue = serializeDirectiveValue(value, nonce)
-    }
-
-    serializedDirectives.push(`${directive} ${serializedValue}`)
-  }
+  const serializedDirectives = Object.entries(directives).map(
+    ([directive, value]) => serializeDirective(directive, value, nonce)
+  )
 
   if (reportUri) {
     serializedDirectives.push(`report-uri ${reportUri}`)

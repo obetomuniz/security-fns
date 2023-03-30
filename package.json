@@ -35,14 +35,17 @@
   },
   "scripts": {
     "pkg": "rm -rf ./dist/ && rollup -c",
+    "prepublishOnly": "npm run pkg",
     "release": "release-it"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
     "rollup": "^3.20.2",
     "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-filesize": "^10.0.0",
     "tslib": "^2.5.0",
     "typescript": "^5.0.2"
   }

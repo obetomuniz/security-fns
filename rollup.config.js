@@ -1,9 +1,10 @@
 import resolve from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
 import typescript from "@rollup/plugin-typescript"
+import terser from "@rollup/plugin-terser"
 import dts from "rollup-plugin-dts"
-
 import filesize from "rollup-plugin-filesize"
+
 import packageJson from "./package.json" assert { type: "json" }
 
 const config = [
@@ -27,6 +28,7 @@ const config = [
       typescript({
         tsconfig: "./tsconfig.json",
       }),
+      terser(),
       filesize(),
     ],
   },
