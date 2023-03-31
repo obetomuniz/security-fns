@@ -33,12 +33,11 @@ jobs:
       - name: Comment on pull request
         uses: actions/github-script@v6
         env:
-          PR_COMMENT_BASE64: ${{ steps.ai_security_check.outputs.PR_COMMENT_BASE64 }}
+          PR_COMMENT: ${{ env.PR_COMMENT }}
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            const prCommentBase64 = process.env.PR_COMMENT_BASE64 || "";
-            const prComment = Buffer.from(prCommentBase64, "base64").toString("utf8") || "No security or privacy issues found.";
+            const prComment = process.env.PR_COMMENT || "No security or privacy issues found.";
             const { data } = await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
