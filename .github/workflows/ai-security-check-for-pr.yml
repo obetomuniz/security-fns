@@ -1,0 +1,16 @@
+name: AI Security Check for Pull Requests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ai_security_check_for_pull_requests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: AI Security Check for Pull Requests
+        uses: obetomuniz/ai-security-check-for-pull-requests-action@main
+        with:
+          fetch-depth: 0
