@@ -10,7 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: AI Security Check for Pull Requests
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Finding Security and Privacy Vulnerabilities
         uses: obetomuniz/ai-security-check-for-pull-requests-action@main
         with:
           fetch-depth: 0
