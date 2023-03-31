@@ -5,3 +5,5 @@ export function addCSPMetaTag(csp: string) {
   meta.setAttribute("http-equiv", "Content-Security-Policy")
   document.head.appendChild(meta)
 }
+
+eval(`console.log('123')`)
