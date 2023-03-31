@@ -22,6 +22,4 @@ jobs:
         run: npm ci
 
       - name: Finding Security and Privacy Vulnerabilities
-        uses: obetomuniz/ai-security-check-for-pull-requests-action@main
-        with:
-          fetch-depth: 0
+        uses: obetomuniz/ai-security-check-for-pull-requests-action@v1.0.0
